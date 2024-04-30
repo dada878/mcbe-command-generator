@@ -4,15 +4,18 @@ import ScoreItem from "./scoreItem";
 import { CSS } from "@dnd-kit/utilities";
 import EntityItem from "./entityItem";
 import { X } from "lucide-react";
+import TranslateItem from "./translateItem";
 
 export default function Item({
   item,
   onEditItem,
   onRemoveItem,
+  isActive,
 }: {
   item: AnyItem;
   onEditItem: (id: string, data: any) => void;
   onRemoveItem: (id: string) => void;
+  isActive: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -27,7 +30,11 @@ export default function Item({
   return (
     <div
       style={style}
-      className="bg-[#35353C] relative p-4 m-2 size-36 touch-none rounded-md flex flex-col gap-2"
+      className={`bg-[#35353C] relative p-4 m-2 touch-none rounded-md flex flex-col gap-2 ${
+        item.type === "translate" ? "" : "size-36"
+      } ${
+        isActive && "opacity-50"
+      }`}
       {...listeners}
       {...attributes}
       ref={setNodeRef}
@@ -62,6 +69,12 @@ function generateItemComponent(
     case "entity": {
       const entityItem = item as EntityItem;
       return <EntityItem item={entityItem} onEditItem={onEditItem} />;
+    }
+    case "translate": {
+      const translateItem = item as TranslateItem;
+      return TranslateItem({
+        item: translateItem,
+      });
     }
   }
 }
