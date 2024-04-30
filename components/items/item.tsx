@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import TranslateItem from "./translateItem";
 import CreateItem from "./createItem";
 import { useState } from "react";
+import { cn } from "@/utils/cn";
 
 export default function Item({
   item,
@@ -34,9 +35,13 @@ export default function Item({
   return (
     <div
       style={style}
-      className={`bg-[#35353C] relative p-4 m-2 touch-none rounded-md ${
-        item.type === "translate" ? "" : "size-36"
-      } ${isActive && "opacity-50"}`}
+      className={cn(
+        `bg-[#35353C] relative p-4 m-2 touch-none rounded-md`, 
+        item.type === "translate" ? "" : "size-36",
+        {
+          "opacity-50": isActive,
+        },
+      )}
       {...listeners}
       {...attributes}
       ref={setNodeRef}

@@ -18,7 +18,7 @@ interface EntityItem extends Item {
 
 interface TranslateItem extends Item {
   content: string;
-  children: string[];
+  items: ItemList;
 }
 
 interface CreateItem extends Item {}

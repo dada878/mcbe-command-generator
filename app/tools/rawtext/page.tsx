@@ -20,7 +20,18 @@ import Item from "@/components/items/item";
 
 export default function Page() {
   const [items, setItems] = useState<ItemList>([
-    { id: "1", type: "translate" },
+    {
+      id: "1",
+      type: "translate",
+      content: "Hello World",
+      items: [
+        {
+          id: "11",
+          type: "text",
+          content: "Hello World",
+        },
+      ],
+    },
   ]);
 
   const history = useRef<ItemList[]>([items]);

@@ -9,16 +9,22 @@ import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core";
 import { useState } from "react";
 import useCustomSensors from "@/hooks/useCustomSensors";
 import CreateItem from "./items/createItem";
-import toast from "react-hot-toast";
+import { cn } from "@/utils/cn";
 
 export default function Editor({
   items,
   setItems,
   recordHistory,
+  onChange,
+  className,
+  isNested,
 }: {
   items: ItemList;
   setItems: (items: ItemList) => void;
   recordHistory: () => void;
+  onChange?: (items: ItemList) => void;
+  className?: string;
+  isNested?: boolean;
 }) {
   const [activeId, setActiveId] = useState(null);
   const sensors = useCustomSensors();
@@ -31,21 +37,22 @@ export default function Editor({
   }
 
   function handleEditItem(id: string, data: any) {
-    setItems(
-      items.map((item) => {
-        if (item.id === id) {
-          return { ...item, ...data };
-        }
-        return item;
-      })
-    );
+    const nextItems = items.map((item) => {
+      if (item.id === id) {
+        return { ...item, ...data };
+      }
+      return item;
+    });
+    setItems(nextItems);
     recordHistory();
+    onChange && onChange(nextItems);
   }
 
   function handleRemoveItem(id: string) {
-    console.log(id);
-    setItems(items.filter((item) => item.id !== id));
+    const nextItems = items.filter((item) => item.id !== id);
+    setItems(nextItems);
     recordHistory();
+    onChange && onChange(nextItems);
   }
 
   function handleDargOver(event: any) {
@@ -61,12 +68,23 @@ export default function Editor({
         return;
       }
 
-      setItems(arrayMove(items, oldIndex, newIndex));
+      const nextItems = arrayMove(items, oldIndex, newIndex);
+
+      setItems(nextItems);
+      onChange && onChange(nextItems);
     }
   }
 
   return (
-    <div className="grow overflow-x-scroll bg-[#27272C] p-3 pb-0 rounded-md scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full">
+    <div className={
+      cn("grow bg-[#27272C] p-3 pb-0 rounded-md scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full",
+        className,
+        {
+          "p-1 pb-1": isNested,
+          "overflow-x-scroll": !isNested,
+        }
+      )
+    }>
       <DndContext
         onDragEnd={handleDragEnd}
         collisionDetection={closestCenter}
@@ -100,23 +118,24 @@ export default function Editor({
             ) : null}
           </DragOverlay>
           <div
-            className={`bg-[#35353C] relative min-w-36 p-4 m-2 touch-none rounded-md flex flex-col gap-2`}
+            className={`bg-[#35353C] relative min-w-36 h-36 p-4 m-2 touch-none rounded-md flex flex-col gap-2`}
           >
             <CreateItem
               handleAddItem={(type) => {
+                let nextItems = items;
                 switch (type) {
                   case "text":
-                    setItems([
+                    nextItems = [
                       ...items,
                       {
                         id: Date.now().toString(),
                         type: "text",
-                        content: "Hello",
+                        content: "Hello World",
                       },
-                    ]);
+                    ];
                     break;
                   case "score":
-                    setItems([
+                    nextItems = [
                       ...items,
                       {
                         id: Date.now().toString(),
@@ -124,20 +143,39 @@ export default function Editor({
                         entity: "@s",
                         scoreboard: "score",
                       },
-                    ]);
+                    ];
                     break;
                   case "entity":
-                    setItems([
+                    nextItems = [
                       ...items,
                       {
                         id: Date.now().toString(),
                         type: "entity",
                         selector: "@s",
                       },
-                    ]);
+                    ];
+                    break;
+                  case "translate":
+                    nextItems = [
+                      ...items,
+                      {
+                        id: Date.now().toString(),
+                        type: "translate",
+                        content: "Hello World",
+                        items: [
+                          {
+                            id: Date.now().toString() + ":",
+                            type: "text",
+                            content: "Hello World",
+                          },
+                        ],
+                      },
+                    ];
                     break;
                 }
                 recordHistory();
+                setItems(nextItems);
+                onChange && onChange(nextItems);
               }}
             />
           </div>

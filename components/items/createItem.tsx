@@ -45,6 +45,7 @@ export default function CreateItem({
               <option value="text">文字元件</option>
               <option value="score">分數元件</option>
               <option value="entity">實體元件</option>
+              <option value="translate">翻譯元件</option>
             </select>
             <button
               className="bg-[#525355] text-white p-2 text-sm rounded-md"
