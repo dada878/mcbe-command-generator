@@ -23,7 +23,6 @@ export default function Page() {
     { id: "1", type: "text", content: "Hello World" },
     { id: "2", type: "score", entity: "@s", scoreboard: "score" },
     { id: "3", type: "entity", selector: "@s" },
-    { id: "4", type: "translate", content: "Hello World" },
   ]);
 
   const history = useRef<ItemList[]>([items]);
@@ -85,11 +84,6 @@ export default function Page() {
       </div>
       <Preview items={items} />
       <div className="flex w-full gap-4">
-        <CreateCard
-          selectedType={selectedType}
-          setSelectedType={setSelectedType}
-          handleAddItem={handleAddItem}
-        />
         <Editor
           items={items}
           setItems={setItems}

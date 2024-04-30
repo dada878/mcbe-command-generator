@@ -5,6 +5,8 @@ import { CSS } from "@dnd-kit/utilities";
 import EntityItem from "./entityItem";
 import { X } from "lucide-react";
 import TranslateItem from "./translateItem";
+import CreateItem from "./createItem";
+import { useState } from "react";
 
 export default function Item({
   item,
@@ -17,9 +19,11 @@ export default function Item({
   onRemoveItem: (id: string) => void;
   isActive: boolean;
 }) {
+  const [disable, setDisable] = useState(item.type === "create");
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: item.id,
+      disabled: disable,
     });
 
   const style = {
@@ -30,25 +34,28 @@ export default function Item({
   return (
     <div
       style={style}
-      className={`bg-[#35353C] relative p-4 m-2 touch-none rounded-md flex flex-col gap-2 ${
+      className={`bg-[#35353C] relative p-4 m-2 touch-none rounded-md ${
         item.type === "translate" ? "" : "size-36"
-      } ${
-        isActive && "opacity-50"
-      }`}
+      } ${isActive && "opacity-50"}`}
       {...listeners}
       {...attributes}
       ref={setNodeRef}
     >
-      <span
-        data-on-dnd="true"
-        onClick={() => {
-          onRemoveItem(item.id);
-        }}
-      >
-        <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
-      </span>
-
+      {!disable && (
+        <span
+          data-on-dnd="true"
+          onClick={() => {
+            onRemoveItem(item.id);
+          }}
+        >
+          <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
+        </span>
+      )}
+      <div className="flex flex-col gap-2">
       {generateItemComponent(item, onEditItem)}
+
+      </div>
+
     </div>
   );
 }
@@ -75,6 +82,9 @@ function generateItemComponent(
       return TranslateItem({
         item: translateItem,
       });
+    }
+    case "create": {
+      return <CreateItem />;
     }
   }
 }
