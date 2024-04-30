@@ -35,7 +35,7 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center h-screen mx-auto px-4">
+    <div className="flex flex-col gap-4 justify-center items-center md:my-0 my-8 h-screen mx-auto px-4">
       <ActionBar
         updateItems={setItems}
         commandType={commandType}

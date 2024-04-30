@@ -10,7 +10,7 @@ export default function TranslateItem({
 }) {
   return (
     <>
-      <p>翻譯元件</p>
+      <p className="md:text-base text-sm">翻譯元件</p>
       <Input
         value={item.content}
         onChange={(value) => {

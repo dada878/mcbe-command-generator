@@ -9,7 +9,7 @@ export default function ScoreItem({
 }) {
   return (
     <>
-      <p>分數元件</p>
+      <p className="md:text-base text-sm">分數元件</p>
       <Input
         value={item.entity}
         onChange={(value) => {

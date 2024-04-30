@@ -33,8 +33,8 @@ export default function Item({
     <div
       style={style}
       className={cn(
-        `bg-[#35353C] relative p-4 m-2 touch-none rounded-md`,
-        item.type === "translate" ? "" : "size-36",
+        `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md`,
+        item.type === "translate" ? "" : "h-30 w-28 md:size-36",
         {
           "opacity-50": isActive,
         }
@@ -51,7 +51,7 @@ export default function Item({
       >
         <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
       </span>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col md:gap-2 gap-1">
         {generateItemComponent(item, onEditItem)}
       </div>
     </div>

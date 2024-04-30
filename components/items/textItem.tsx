@@ -9,7 +9,7 @@ export default function TextItem({
 }) {
   return (
     <>
-      <p>文字元件</p>
+      <p className="md:text-base text-sm">文字元件</p>
       <Input
         value={item.content}
         onChange={(value) => {
