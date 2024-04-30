@@ -49,7 +49,7 @@ export default function Item({
           onRemoveItem(item.id);
         }}
       >
-        <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
+        <X className="absolute right-1 top-1 md:size-6 size-4 transition text-gray-400 hover:bg-[#45454e] md:p-1 rounded-full" />
       </span>
       <div className="flex flex-col md:gap-2 gap-1">
         {generateItemComponent(item, onEditItem)}

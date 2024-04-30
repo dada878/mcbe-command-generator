@@ -60,7 +60,7 @@ export default function Page() {
           setCommandType={setCommandType}
         />
         <Preview command={JSON.stringify(json)} />
-        <div className="flex w-full gap-4">
+        <div className="flex w-full gap-4 justify-center items-center">
           <Editor
             items={items}
             setItems={setItems}
