@@ -108,35 +108,38 @@ export default function Editor({
                   case "text":
                     setItems([
                       ...items,
-                      { id: Date.now().toString(), type: "text", content: "Hello" },
+                      {
+                        id: Date.now().toString(),
+                        type: "text",
+                        content: "Hello",
+                      },
                     ]);
                     break;
-                    case "score":
-                      setItems([
-                        ...items,
-                        {
-                          id: Date.now().toString(),
-                          type: "score",
-                          entity: "@s",
+                  case "score":
+                    setItems([
+                      ...items,
+                      {
+                        id: Date.now().toString(),
+                        type: "score",
+                        entity: "@s",
                         scoreboard: "score",
                       },
                     ]);
                     break;
-                    case "entity":
-                      setItems([
-                        ...items,
-                        {
-                          id: Date.now().toString(),
-                          type: "entity",
-                          selector: "@s",
-                        },
-                      ]);
-                      break;
-                    }
-                    recordHistory();
-                    toast.success("添加成功");
-                  }}
-                  />
+                  case "entity":
+                    setItems([
+                      ...items,
+                      {
+                        id: Date.now().toString(),
+                        type: "entity",
+                        selector: "@s",
+                      },
+                    ]);
+                    break;
+                }
+                recordHistory();
+              }}
+            />
           </div>
         </div>
       </DndContext>

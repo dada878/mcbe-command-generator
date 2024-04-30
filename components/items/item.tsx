@@ -81,10 +81,8 @@ function generateItemComponent(
       const translateItem = item as TranslateItem;
       return TranslateItem({
         item: translateItem,
+        onEditItem: onEditItem,
       });
-    }
-    case "create": {
-      return <CreateItem />;
     }
   }
 }

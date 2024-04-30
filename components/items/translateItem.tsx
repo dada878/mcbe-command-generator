@@ -10,13 +10,30 @@ import { useState } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import useCustomSensors from "@/hooks/useCustomSensors";
 
-export default function TranslateItem({ item }: { item: TranslateItem }) {
-  function handleEditItem(id: string, data: any) {
-    console.log("Edit", id, data);
-  }
+export default function TranslateItem({ item, 
+  onEditItem,
+ }: { item: TranslateItem, onEditItem: (id: string, data: any) => void;}) {
+  const [items, setItems] = useState<ItemList>([
+    {
+      id: "11",
+      type: "text",
+      content: "Hello World",
+    },
+  ]);
+
+  // function handleEditItem(id: string, data: any) {
+  //   setItems(
+  //     items.map((item) => {
+  //       if (item.id === id) {
+  //         return { ...item, ...data };
+  //       }
+  //       return item;
+  //     })
+  //   );
+  // }
 
   function handleRemoveItem(id: string) {
-    console.log("Remove", id);
+    setItems(items.filter((item) => item.id !== id));
   }
 
   function handleDragEnd(event: any) {
@@ -34,29 +51,13 @@ export default function TranslateItem({ item }: { item: TranslateItem }) {
   }
 
   const sensors = useCustomSensors();
-  
-  const [items, setItems] = useState<ItemList>([
-    {
-      id: "11",
-      type: "text",
-      content: "Hello World",
-    },
-    {
-      id: "12",
-      type: "score",
-      entity: "@s",
-      scoreboard: "score",
-    },
-    {
-      id: "13",
-      type: "entity",
-      selector: "@s",
-    },
-  ]);
 
   return (
     <>
       <p>翻譯元件</p>
+      <Input value={item.content} onChange={(value) => {
+        onEditItem(item.id, { content: value });
+      }} />
       <div className="grow overflow-x-scroll bg-[#27272C] p-3 pb-0 rounded-md scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full">
           <DndContext
             onDragEnd={handleDragEnd}

@@ -21,6 +21,13 @@ export function generateJson(items: ItemList): any {
             selector: entityItem.selector,
           };
         }
+        case "translate": {
+          const translateItem = item as TranslateItem;
+          return {
+            translate: translateItem.content,
+            with: generateJson(translateItem.items),
+          };
+        }
       }
     }).filter((item) => item),
   };
