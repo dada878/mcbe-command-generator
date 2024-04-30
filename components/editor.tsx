@@ -55,6 +55,63 @@ export default function Editor({
     onChange && onChange(nextItems);
   }
 
+  function handleAddItem(type: string) {
+    let nextItems = items;
+    switch (type) {
+      case "text":
+        nextItems = [
+          ...items,
+          {
+            id: Date.now().toString(),
+            type: "text",
+            content: "Hello World",
+          },
+        ];
+        break;
+      case "score":
+        nextItems = [
+          ...items,
+          {
+            id: Date.now().toString(),
+            type: "score",
+            entity: "@s",
+            scoreboard: "score",
+          },
+        ];
+        break;
+      case "entity":
+        nextItems = [
+          ...items,
+          {
+            id: Date.now().toString(),
+            type: "entity",
+            selector: "@s",
+          },
+        ];
+        break;
+      case "translate":
+        nextItems = [
+          ...items,
+          {
+            id: Date.now().toString(),
+            type: "translate",
+            content: "Hello World",
+            items: [
+              {
+                id: Date.now().toString() + ":",
+                type: "text",
+                content: "Hello World",
+              },
+            ],
+          },
+        ];
+        break;
+    }
+    recordHistory();
+    setItems(nextItems);
+    onChange && onChange(nextItems);
+  }
+
   function handleDargOver(event: any) {
     const { active, over } = event;
     if (!over) {
@@ -121,64 +178,7 @@ export default function Editor({
           <div
             className={`bg-[#35353C] relative min-w-36 h-36 p-4 m-2 touch-none rounded-md flex flex-col gap-2`}
           >
-            <CreateItem
-              handleAddItem={(type) => {
-                let nextItems = items;
-                switch (type) {
-                  case "text":
-                    nextItems = [
-                      ...items,
-                      {
-                        id: Date.now().toString(),
-                        type: "text",
-                        content: "Hello World",
-                      },
-                    ];
-                    break;
-                  case "score":
-                    nextItems = [
-                      ...items,
-                      {
-                        id: Date.now().toString(),
-                        type: "score",
-                        entity: "@s",
-                        scoreboard: "score",
-                      },
-                    ];
-                    break;
-                  case "entity":
-                    nextItems = [
-                      ...items,
-                      {
-                        id: Date.now().toString(),
-                        type: "entity",
-                        selector: "@s",
-                      },
-                    ];
-                    break;
-                  case "translate":
-                    nextItems = [
-                      ...items,
-                      {
-                        id: Date.now().toString(),
-                        type: "translate",
-                        content: "Hello World",
-                        items: [
-                          {
-                            id: Date.now().toString() + ":",
-                            type: "text",
-                            content: "Hello World",
-                          },
-                        ],
-                      },
-                    ];
-                    break;
-                }
-                recordHistory();
-                setItems(nextItems);
-                onChange && onChange(nextItems);
-              }}
-            />
+            <CreateItem handleAddItem={handleAddItem} />
           </div>
         </div>
       </DndContext>
