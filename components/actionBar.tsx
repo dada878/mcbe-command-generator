@@ -7,6 +7,7 @@ import Input from "./form/input";
 import commandToItems from "@/helpers/commandToItems";
 import { cn } from "@/utils/cn";
 import TemplateStore from "./templateStore";
+import { errorToast } from "@/utils/toast";
 
 export default function ActionBar({
   commandType,
@@ -38,7 +39,7 @@ export default function ActionBar({
           className="flex gap-2 items-center"
         >
           <FolderInput size={16} />
-          從指令載入
+          <span className="hidden md:inline">從指令載入</span>
         </Button>
         <Button
           onClick={() => {
@@ -47,13 +48,16 @@ export default function ActionBar({
           className="flex gap-2 items-center"
         >
           <LucideTrash2 size={16} />
-          清除全部
+          <span className="hidden md:inline">清除全部</span>
         </Button>
-        <Button onClick={() => {
-          setIsTemplateDialogOpen(true);
-        }} className="flex gap-2 items-center">
+        <Button
+          onClick={() => {
+            setIsTemplateDialogOpen(true);
+          }}
+          className="flex gap-2 items-center"
+        >
           <LayoutTemplate size={16} />
-          套用模板
+          <span className="hidden md:inline">套用模板</span>
         </Button>
 
         <Select selected={commandType} setSelected={setCommandType}>
@@ -74,8 +78,16 @@ export default function ActionBar({
             />
             <Button
               onClick={() => {
-                updateItems(commandToItems(command));
-                setIsCommandDialogOpen(false);
+                try {
+                  updateItems(
+                    commandToItems(command.replaceAll("\\n", "\\\\n"))
+                  );
+                  setIsCommandDialogOpen(false);
+                } catch (e) {
+                  if (e instanceof Error) {
+                    errorToast(e.message);
+                  }
+                }
               }}
               className="bg-[#525355] text-white p-2 text-sm rounded-md"
             >
@@ -111,12 +123,12 @@ export default function ActionBar({
         </div>
       </Dialog>
       <Dialog isOpen={isTemplateDialogOpen} setIsOpen={setIsTemplateDialogOpen}>
-        <TemplateStore onApply={
-          (command) => {
+        <TemplateStore
+          onApply={(command) => {
             updateItems(commandToItems(command));
             setIsTemplateDialogOpen(false);
-          }
-        } />
+          }}
+        />
       </Dialog>
     </>
   );
