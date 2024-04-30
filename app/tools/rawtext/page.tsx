@@ -35,20 +35,6 @@ export default function Page() {
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center h-screen container mx-auto">
-      <div className="flex gap-4">
-        <UndoButton
-          items={items}
-          setItems={setItems}
-          history={history}
-          redoHistory={redoHistory}
-        />
-        <RedoButton
-          items={items}
-          setItems={setItems}
-          history={history}
-          redoHistory={redoHistory}
-        />
-      </div>
       <Preview items={items} />
       <div className="flex w-full gap-4">
         <Editor
