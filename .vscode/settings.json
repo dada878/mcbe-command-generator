@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
-        "rawtext"
+        "actionbar",
+        "rawtext",
+        "tellraw",
+        "titleraw"
     ],
     "editor.tabSize": 2
 }

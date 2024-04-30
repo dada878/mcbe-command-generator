@@ -1,4 +1,4 @@
-import Input from "../input";
+import Input from "../form/input";
 
 export default function TextItem({
   item,

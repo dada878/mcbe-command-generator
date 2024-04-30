@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import Dialog from "../dialog";
+import Select from "../form/select";
 
 export default function CreateItem({
   handleAddItem,
@@ -29,16 +30,12 @@ export default function CreateItem({
       <Dialog isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="flex flex-col gap-4 bg-[#27272C] rounded-md w-36 p-4">
           <div className="flex flex-col gap-3 justify-center">
-            <select
-              className="w-full bg-[#35353c] text-sm text-white p-2 rounded-md outline-none cursor-pointer"
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
+            <Select selected={selectedType} setSelected={setSelectedType} className="w-full" >
               <option value="text">文字元件</option>
               <option value="score">分數元件</option>
               <option value="entity">實體元件</option>
               <option value="translate">翻譯元件</option>
-            </select>
+            </Select>
             <button
               className="bg-[#525355] text-white p-2 text-sm rounded-md"
               onClick={() => {

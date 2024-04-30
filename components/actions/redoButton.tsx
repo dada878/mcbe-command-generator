@@ -1,3 +1,4 @@
+import { successToast } from "@/utils/toast";
 import { Redo } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -22,15 +23,7 @@ export default function RedoButton({
         history.current.push(items);
         setItems(redoHistory.current[redoHistory.current.length - 1]);
         redoHistory.current.pop();
-        toast.success("重做成功", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-          position: "bottom-right",
-          duration: 2000,
-        });
+        successToast("重做成功");
       }}
     >
       <Redo size="16" />

@@ -1,4 +1,4 @@
-import Input from "../input";
+import Input from "../form/input";
 import Editor from "../editor";
 
 export default function TranslateItem({

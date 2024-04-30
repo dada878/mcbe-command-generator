@@ -1,3 +1,4 @@
+import { successToast } from "@/utils/toast";
 import { Undo } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -22,15 +23,7 @@ export default function UndoButton({
         redoHistory.current.push(items);
         setItems(history.current[history.current.length - 1]);
         history.current.pop();
-        toast.success("復原成功", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-          position: "bottom-right",
-          duration: 2000,
-        });
+        successToast("復原成功");
       }}
     >
       <Undo size="16" />

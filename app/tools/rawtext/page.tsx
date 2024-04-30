@@ -5,8 +5,11 @@ import Command from "@/components/command";
 import { useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
-import UndoButton from "@/components/actions/undoButton";
-import RedoButton from "@/components/actions/redoButton";
+import Select from "@/components/form/select";
+import Button from "@/components/form/button";
+import { FolderInput } from "lucide-react";
+import Dialog from "@/components/dialog";
+import ActionBar from "@/components/actionBar";
 
 export default function Page() {
   const [items, setItems] = useState<ItemList>([
@@ -24,6 +27,8 @@ export default function Page() {
     },
   ]);
 
+  const [commandType, setCommandType] = useState<string>("rawtext");
+
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
   const json = generateJson(items);
@@ -35,6 +40,11 @@ export default function Page() {
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center h-screen container mx-auto">
+      <ActionBar
+        updateItems={setItems}
+        commandType={commandType}
+        setCommandType={setCommandType}
+      />
       <Preview items={items} />
       <div className="flex w-full gap-4">
         <Editor
@@ -43,7 +53,7 @@ export default function Page() {
           recordHistory={recordHistory}
         />
       </div>
-      <Command json={json} />
+      <Command commandType={commandType} json={json} />
     </div>
   );
 }
