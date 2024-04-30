@@ -11,17 +11,17 @@ export default function Command({
   function getCommandPrefix() {
     switch (commandType) {
       case "tellraw-at-a":
-        return "/tellraw @a";
+        return "/tellraw @a ";
       case "tellraw-at-p":
-        return "/tellraw @p";
+        return "/tellraw @p ";
       case "titleraw-actionbar":
-        return "/execute as @a at @s run titleraw @s actionbar";
+        return "/execute as @a at @s run titleraw @s actionbar ";
       default:
         return "";
     }
   }
 
-  const finalCommand = getCommandPrefix() + " " + JSON.stringify(json);
+  const finalCommand = getCommandPrefix() + JSON.stringify(json).replaceAll('\\\\', '\\');
 
   function handleCopy() {
     navigator.clipboard.writeText(finalCommand);
@@ -29,7 +29,7 @@ export default function Command({
   }
 
   return (
-    <div className="bg-[#27272C] rounded-md text-white w-full">
+    <div className="bg-[#27272C] rounded-md text-white w-full container">
       <p className="text-wrap whitespace-break-spaces break-words p-4 pb-0 break-all text-sm">
         {finalCommand}
       </p>

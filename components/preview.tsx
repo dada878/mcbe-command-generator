@@ -1,14 +1,17 @@
+import commandToItems from "@/helpers/commandToItems";
 import parseMinecraftTextToJSX from "@/helpers/parseMinecraftTextToJSX";
 import React from "react";
 
-export default function Preview({ items }: { items: ItemList }) {
+export default function Preview({ command }: { command: string }) {
   const elements = praseNewline(
-    parseMinecraftTextToJSX(praseItemsToTexts(items).join(""))
+    parseMinecraftTextToJSX(praseItemsToTexts(
+      commandToItems(command)
+    ).join(""))
   );
 
   return (
     <div
-      className="w-full flex justify-center items-center h-36 rounded-md"
+      className="w-full flex justify-center items-center min-h-36 bg-no-repeat py-4 px-2 bg-cover bg-center rounded-md container"
       style={{
         backgroundImage: `url("../../preview-bg.png")`,
       }}
@@ -21,25 +24,25 @@ export default function Preview({ items }: { items: ItemList }) {
 }
 
 function praseNewline(elements: JSX.Element[]) {
-  const elementsCopy = [...elements];
-  for (const element of elementsCopy) {
+  const result = [];
+  for (const element of elements) {
     if (element.props.children.includes("\\n")) {
-      const index = elementsCopy.indexOf(element);
-      elementsCopy[index] = (
-        <span key={index}>
-          {element.props.children
-            .split("\\n")
-            .map((line: string, i: number) => (
-              <React.Fragment key={i}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
-        </span>
-      );
+      const lines = element.props.children.split("\\n");
+      for (let i = 0; i < lines.length; i++) {
+        result.push(
+          <span style={element.props.style}>
+            {lines[i]}
+          </span>
+        );
+        if (i !== lines.length - 1) {
+          result.push(<br />);
+        }
+      }
+    } else {
+      result.push(element);
     }
   }
-  return elementsCopy;
+  return result;
 }
 
 function praseItemsToTexts(items: ItemList) {

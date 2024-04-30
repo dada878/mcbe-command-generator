@@ -5,10 +5,6 @@ import Command from "@/components/command";
 import { useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
-import Select from "@/components/form/select";
-import Button from "@/components/form/button";
-import { FolderInput } from "lucide-react";
-import Dialog from "@/components/dialog";
 import ActionBar from "@/components/actionBar";
 
 export default function Page() {
@@ -39,13 +35,13 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center h-screen container mx-auto">
+    <div className="flex flex-col gap-4 justify-center items-center h-screen mx-auto px-4">
       <ActionBar
         updateItems={setItems}
         commandType={commandType}
         setCommandType={setCommandType}
       />
-      <Preview items={items} />
+      <Preview command={JSON.stringify(json)} />
       <div className="flex w-full gap-4">
         <Editor
           items={items}
