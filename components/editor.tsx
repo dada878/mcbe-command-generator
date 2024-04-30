@@ -141,7 +141,7 @@ export default function Editor({
         className,
         {
           "p-1 pb-1": isNested,
-          "overflow-x-scroll py-16 md:py-3": !isNested,
+          "overflow-x-scroll py-16 md:pt-3 md:pb-0": !isNested,
         }
       )}
     >
