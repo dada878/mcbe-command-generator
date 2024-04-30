@@ -3,9 +3,7 @@ import React from "react";
 
 export default function Preview({ items }: { items: ItemList }) {
   const elements = praseNewline(
-    parseMinecraftTextToJSX(
-      praseItemsToText(items)
-    )
+    parseMinecraftTextToJSX(praseItemsToTexts(items).join(""))
   );
 
   return (
@@ -44,24 +42,51 @@ function praseNewline(elements: JSX.Element[]) {
   return elementsCopy;
 }
 
-function praseItemsToText(items: ItemList) {
-  let text = "";
+function praseItemsToTexts(items: ItemList) {
+  const texts : string[] = [];
   for (const item of items) {
     switch (item.type) {
       case "text": {
         const textItem = item as TextItem;
-        text += textItem.content;
+        texts.push(textItem.content);
         break;
       }
       case "score": {
-        text += "123";
+        texts.push("123");
         break;
       }
       case "entity": {
-        text += "Dada878";
+        texts.push("Dada878");
+        break;
+      }
+      case "translate": {
+        const args = praseItemsToTexts((item as TranslateItem).items);
+        const translateItem = item as TranslateItem;
+        let index = 0;
+        let content = translateItem.content;
+        // process %%s
+        while (content.includes("%%s")) {
+          const arg = index < args.length ? args[index] : "";
+          content = content.replace("%%s", arg);
+          index++;
+        }
+        // process %%d
+        while (content.includes("%%d")) {
+          const arg = index < args.length ? args[index] : "";
+          content = content.replace("%%d", arg);
+          index++;
+        }
+        // process %%n
+        for (let i = 1; i <= 9; i++) {
+          const currentIndex = index + i - 1;
+          const outOfRange = currentIndex >= args.length || currentIndex < 0;
+          const arg = outOfRange ? "" : args[currentIndex];
+          content = content.replaceAll(`%%${i}`, arg);
+        }
+        texts.push(content);
         break;
       }
     }
   }
-  return text;
+  return texts;
 }
