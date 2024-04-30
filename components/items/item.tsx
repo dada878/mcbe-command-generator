@@ -15,8 +15,8 @@ export default function Item({
   isActive,
 }: {
   item: AnyItem;
-  onEditItem: (id: string, data: any) => void;
-  onRemoveItem: (id: string) => void;
+  onEditItem: (id: number, data: any) => void;
+  onRemoveItem: (id: number) => void;
   isActive: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -60,7 +60,7 @@ export default function Item({
 
 function generateItemComponent(
   item: AnyItem,
-  onEditItem: (id: string, data: any) => void
+  onEditItem: (id: number, data: any) => void
 ) {
   switch (item.type) {
     case "text": {

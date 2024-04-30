@@ -26,7 +26,7 @@ export default function Command({
     getCommandPrefix() + JSON.stringify(json).replaceAll("\\\\", "\\");
 
   return (
-    <div className="bg-[#27272C] rounded-md text-white w-full container">
+    <div className="bg-[#27272C] rounded-md text-[#C8C8C8] w-full container">
       <p className="text-wrap whitespace-break-spaces break-words p-4 pb-0 break-all text-sm">
         {finalCommand}
       </p>

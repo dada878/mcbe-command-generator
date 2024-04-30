@@ -10,6 +10,8 @@ import { useState } from "react";
 import useCustomSensors from "@/hooks/useCustomSensors";
 import CreateItem from "./items/createItem";
 import { cn } from "@/utils/cn";
+import getMaxId from "@/helpers/getNextId";
+import getNextId from "@/helpers/getNextId";
 
 export default function Editor({
   items,
@@ -36,7 +38,7 @@ export default function Editor({
     setActiveId(null);
   }
 
-  function handleEditItem(id: string, data: any) {
+  function handleEditItem(id: number, data: any) {
     const nextItems = items.map((item) => {
       if (item.id === id) {
         return { ...item, ...data };
@@ -48,7 +50,7 @@ export default function Editor({
     onChange && onChange(nextItems);
   }
 
-  function handleRemoveItem(id: string) {
+  function handleRemoveItem(id: number) {
     const nextItems = items.filter((item) => item.id !== id);
     setItems(nextItems);
     recordHistory();
@@ -62,7 +64,7 @@ export default function Editor({
         nextItems = [
           ...items,
           {
-            id: Date.now().toString(),
+            id: getNextId(items) + 1,
             type: "text",
             content: "Hello World",
           },
@@ -72,7 +74,7 @@ export default function Editor({
         nextItems = [
           ...items,
           {
-            id: Date.now().toString(),
+            id: getNextId(items),
             type: "score",
             entity: "@s",
             scoreboard: "score",
@@ -83,7 +85,7 @@ export default function Editor({
         nextItems = [
           ...items,
           {
-            id: Date.now().toString(),
+            id: getNextId(items),
             type: "entity",
             selector: "@s",
           },
@@ -93,12 +95,12 @@ export default function Editor({
         nextItems = [
           ...items,
           {
-            id: Date.now().toString(),
+            id: getNextId(items),
             type: "translate",
             content: "Hello World",
             items: [
               {
-                id: Date.now().toString() + ":",
+                id: getNextId(items) + 1,
                 type: "text",
                 content: "Hello World",
               },

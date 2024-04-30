@@ -5,7 +5,7 @@ export default function TextItem({
   onEditItem,
 }: {
   item: TextItem;
-  onEditItem: (id: string, data: any) => void;
+  onEditItem: (id: number, data: any) => void;
 }) {
   return (
     <>

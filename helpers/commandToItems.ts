@@ -1,3 +1,5 @@
+import getNextId from "./getNextId";
+
 export default function commandToItems(command: string) {
   const regex = /{"rawtext":.+}/g;
   const match = command.match(regex);
@@ -8,8 +10,6 @@ export default function commandToItems(command: string) {
   return praseCommand(components);
 }
 
-let id = 1;
-
 function praseCommand(components: any) {
   const items: any[] = [];
   for (const component of components) {
@@ -17,7 +17,7 @@ function praseCommand(components: any) {
       items.push({
         type: "text",
         content: component.text,
-        id: id++,
+        id: getNextId(items),
       });
     }
     if ("objective" in component) {
@@ -25,21 +25,21 @@ function praseCommand(components: any) {
         type: "score",
         entity: component.name,
         scoreboard: component.objective,
-        id: id++,
+        id: getNextId(items),
       });
     }
     if ("selector" in component) {
       items.push({
         type: "entity",
         selector: component.selector,
-        id: id++,
+        id: getNextId(items),
       });
     }
     if ("translate" in component) {
       items.push({
         type: "translate",
         content: component.translate,
-        id: id++,
+        id: getNextId(items),
         items: praseCommand(component.with.rawtext),
       });
     }

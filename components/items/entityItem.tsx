@@ -5,7 +5,7 @@ export default function EntityItem({
   onEditItem,
 }: {
   item: EntityItem;
-  onEditItem: (id: string, data: any) => void;
+  onEditItem: (id: number, data: any) => void;
 }) {
   return (
     <>

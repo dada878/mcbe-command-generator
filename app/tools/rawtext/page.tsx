@@ -16,12 +16,12 @@ export default function Page() {
   }, []);
 
   const [items, setItems] = useLocalStorage<ItemList>(
-    "data",
+    "rawtext-items",
     [
       {
-        id: "awa",
+        id: 1,
         type: "text",
-        content: "Hello World",
+        content: "這是一段文字",
       },
     ],
     {

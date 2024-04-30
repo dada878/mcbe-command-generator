@@ -6,7 +6,7 @@ export default function TranslateItem({
   onEditItem,
 }: {
   item: TranslateItem;
-  onEditItem: (id: string, data: any) => void;
+  onEditItem: (id: number, data: any) => void;
 }) {
   return (
     <>
