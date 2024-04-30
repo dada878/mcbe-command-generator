@@ -19,11 +19,9 @@ export default function Item({
   onRemoveItem: (id: string) => void;
   isActive: boolean;
 }) {
-  const [disable, setDisable] = useState(item.type === "create");
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: item.id,
-      disabled: disable,
     });
 
   const style = {
@@ -45,16 +43,14 @@ export default function Item({
       {...attributes}
       ref={setNodeRef}
     >
-      {!disable && (
-        <span
-          data-on-dnd="true"
-          onClick={() => {
-            onRemoveItem(item.id);
-          }}
-        >
-          <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
-        </span>
-      )}
+      <span
+        data-on-dnd="true"
+        onClick={() => {
+          onRemoveItem(item.id);
+        }}
+      >
+        <X className="absolute right-1 top-1 size-6 transition text-gray-400 hover:bg-[#45454e] p-1 rounded-full" />
+      </span>
       <div className="flex flex-col gap-2">
         {generateItemComponent(item, onEditItem)}
       </div>

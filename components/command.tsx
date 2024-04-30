@@ -37,8 +37,6 @@ export default function Command({
         <span
           className="text-gray-400 hover:bg-[#45454e] transition p-2 cursor-pointer rounded-full"
           onClick={handleCopy}
-          data-tooltip-id="tooltip"
-          data-tooltip-content="複製指令"
         >
           <Copy size={16} />
         </span>

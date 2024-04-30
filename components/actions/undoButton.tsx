@@ -1,6 +1,5 @@
 import { successToast } from "@/utils/toast";
 import { Undo } from "lucide-react";
-import toast from "react-hot-toast";
 
 export default function UndoButton({
   items,

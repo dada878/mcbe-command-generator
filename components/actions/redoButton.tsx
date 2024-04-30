@@ -1,6 +1,5 @@
 import { successToast } from "@/utils/toast";
 import { Redo } from "lucide-react";
-import toast from "react-hot-toast";
 
 export default function RedoButton({
   items,
