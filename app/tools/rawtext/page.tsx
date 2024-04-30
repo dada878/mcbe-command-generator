@@ -2,32 +2,48 @@
 
 import Editor from "@/components/editor";
 import Command from "@/components/command";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
 import ActionBar from "@/components/actionBar";
+import useLocalStorage from "use-local-storage";
 
 export default function Page() {
-  const [items, setItems] = useState<ItemList>([
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  const [items, setItems] = useLocalStorage<ItemList>(
+    "data",
+    [
+      {
+        id: "awa",
+        type: "text",
+        content: "Hello World",
+      },
+    ],
     {
-      id: "1",
-      type: "translate",
-      content: "Hello World",
-      items: [
-        {
-          id: "11",
-          type: "text",
-          content: "Hello World",
-        },
-      ],
-    },
-  ]);
+      serializer: (obj) => {
+        return JSON.stringify(obj);
+      },
+      parser: (str) => {
+        return JSON.parse(str);
+      },
+      syncData: true,
+    }
+  );
 
   const [commandType, setCommandType] = useState<string>("rawtext");
 
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
   const json = generateJson(items);
+
+  if (!hasMounted) {
+    return null;
+  }
 
   function recordHistory() {
     history.current.push(items);
