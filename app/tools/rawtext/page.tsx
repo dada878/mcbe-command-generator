@@ -28,19 +28,15 @@ export default function Page() {
 
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
-  
 
   const [selectedType, setSelectedType] = useState<string>("text");
 
   const json = generateJson(items);
-  
 
   function recordHistory() {
     history.current.push(items);
     redoHistory.current = [];
   }
-
-  
 
   function handleAddItem() {
     switch (selectedType) {
