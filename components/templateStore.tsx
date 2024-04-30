@@ -66,7 +66,7 @@ const templates = [
   {
     name: "雪球菜單",
     description: "A title for your video",
-    command: `{"rawtext":[{"text":"§e【傳送選單】§r\\\\n"},{"translate":"%%2","with":{"rawtext":[{"selector":"@e[scores={menu=1}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"大廳\\\\n"},{"translate":"%%2","with":{"rawtext":[{"text":"@e[scores={menu=2}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"區域2\\\\n"},{"translate":"%%2","with":{"rawtext":[{"text":"@e[scores={menu=3}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"區域3"}]}`,
+    command: `{"rawtext":[{"text":"§e【傳送選單】§r\\\\n"},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[scores={menu=1}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"大廳\\\\n"},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[scores={menu=2}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"小遊戲\\\\n"},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[scores={menu=3}]"},{"text":"§l§b> "},{"text":"§r"}]}},{"text":"休閒區"}]}`,
   },
   {
     name: "嵌套翻譯元件",

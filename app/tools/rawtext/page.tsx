@@ -35,21 +35,23 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center md:my-0 my-8 h-screen mx-auto px-4">
-      <ActionBar
-        updateItems={setItems}
-        commandType={commandType}
-        setCommandType={setCommandType}
-      />
-      <Preview command={JSON.stringify(json)} />
-      <div className="flex w-full gap-4">
-        <Editor
-          items={items}
-          setItems={setItems}
-          recordHistory={recordHistory}
+    <div className="py-4 md:py-0 min-h-screen flex w-screen">
+      <div className="flex flex-col gap-4 justify-center items-center mx-auto px-4 w-full">
+        <ActionBar
+          updateItems={setItems}
+          commandType={commandType}
+          setCommandType={setCommandType}
         />
+        <Preview command={JSON.stringify(json)} />
+        <div className="flex w-full gap-4">
+          <Editor
+            items={items}
+            setItems={setItems}
+            recordHistory={recordHistory}
+          />
+        </div>
+        <Command commandType={commandType} json={json} />
       </div>
-      <Command commandType={commandType} json={json} />
     </div>
   );
 }
