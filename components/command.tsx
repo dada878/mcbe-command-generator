@@ -1,4 +1,5 @@
 import { successToast } from "@/utils/toast";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Copy } from "lucide-react";
 
 export default function Command({
@@ -21,12 +22,8 @@ export default function Command({
     }
   }
 
-  const finalCommand = getCommandPrefix() + JSON.stringify(json).replaceAll('\\\\', '\\');
-
-  function handleCopy() {
-    navigator.clipboard.writeText(finalCommand);
-    successToast("指令複製成功");
-  }
+  const finalCommand =
+    getCommandPrefix() + JSON.stringify(json).replaceAll("\\\\", "\\");
 
   return (
     <div className="bg-[#27272C] rounded-md text-white w-full container">
@@ -34,12 +31,14 @@ export default function Command({
         {finalCommand}
       </p>
       <div className="flex justify-end items-center gap-2 p-2">
-        <span
-          className="text-gray-400 hover:bg-[#45454e] transition p-2 cursor-pointer rounded-full"
-          onClick={handleCopy}
+        <CopyToClipboard
+          text={finalCommand}
+          onCopy={() => successToast("指令複製成功")}
         >
-          <Copy size={16} />
-        </span>
+          <span className="text-gray-400 hover:bg-[#45454e] transition p-2 cursor-pointer rounded-full">
+            <Copy size={16} />
+          </span>
+        </CopyToClipboard>
       </div>
     </div>
   );
