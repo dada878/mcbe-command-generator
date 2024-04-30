@@ -11,22 +11,46 @@ html {
   color: #E5E5E5;
 }
 
-.modal {
-  padding: 5rem;
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  background-color: #35353C;
-  transition: 200ms;
+/* use  overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full */
+
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.493);
+::-webkit-scrollbar-thumb {
+  background-color: #4f4f57;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #27272C;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4A4A4F;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #4A4A4F;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #27272C;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-resizer {
+  display: none;
 }

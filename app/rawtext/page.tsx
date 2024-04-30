@@ -130,8 +130,8 @@ function Page() {
   }
 
   return (
-    <div className="py-4 md:py-0 min-h-screen flex w-screen">
-      <div className="flex flex-col gap-4 justify-center items-center mx-auto px-4 w-full">
+    <div className="py-4 md:py-0 min-h-screen overflow-x-hidden flex min-w-screen">
+      <div className="flex flex-col gap-4 py-12 justify-center items-center mx-auto px-4 w-full">
         <ActionBar
           updateItems={setItems}
           commandType={commandType}

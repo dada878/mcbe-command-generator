@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} id="app">
+      <body className={`${inter.className}`} id="app">
         <TooltipProvider>
           {children}
           <Toaster />
