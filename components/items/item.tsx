@@ -5,7 +5,6 @@ import { CSS } from "@dnd-kit/utilities";
 import EntityItem from "./entityItem";
 import { X } from "lucide-react";
 import TranslateItem from "./translateItem";
-import CreateItem from "./createItem";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 
@@ -36,11 +35,11 @@ export default function Item({
     <div
       style={style}
       className={cn(
-        `bg-[#35353C] relative p-4 m-2 touch-none rounded-md`, 
+        `bg-[#35353C] relative p-4 m-2 touch-none rounded-md`,
         item.type === "translate" ? "" : "size-36",
         {
           "opacity-50": isActive,
-        },
+        }
       )}
       {...listeners}
       {...attributes}
@@ -57,10 +56,8 @@ export default function Item({
         </span>
       )}
       <div className="flex flex-col gap-2">
-      {generateItemComponent(item, onEditItem)}
-
+        {generateItemComponent(item, onEditItem)}
       </div>
-
     </div>
   );
 }

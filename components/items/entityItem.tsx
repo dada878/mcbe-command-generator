@@ -1,6 +1,5 @@
 import Input from "../input";
 
-
 export default function EntityItem({
   item,
   onEditItem,

@@ -43,7 +43,7 @@ function praseNewline(elements: JSX.Element[]) {
 }
 
 function praseItemsToTexts(items: ItemList) {
-  const texts : string[] = [];
+  const texts: string[] = [];
   for (const item of items) {
     switch (item.type) {
       case "text": {

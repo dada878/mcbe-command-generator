@@ -1,22 +1,12 @@
 "use client";
 
 import Editor from "@/components/editor";
-import { DragOverlay } from "@dnd-kit/core";
 import Command from "@/components/command";
-import { DndContext, closestCenter } from "@dnd-kit/core";
-import useCustomSensors from "@/hooks/useCustomSensors";
-import {
-  SortableContext,
-  arrayMove,
-  horizontalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import { useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
 import UndoButton from "@/components/actions/undoButton";
 import RedoButton from "@/components/actions/redoButton";
-import CreateCard from "@/components/actions/createCard";
-import Item from "@/components/items/item";
 
 export default function Page() {
   const [items, setItems] = useState<ItemList>([
@@ -36,43 +26,11 @@ export default function Page() {
 
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
-
-  const [selectedType, setSelectedType] = useState<string>("text");
-
   const json = generateJson(items);
 
   function recordHistory() {
     history.current.push(items);
     redoHistory.current = [];
-  }
-
-  function handleAddItem() {
-    switch (selectedType) {
-      case "text":
-        setItems((items) => [
-          ...items,
-          { id: Date.now().toString(), type: "text", content: "Hello World" },
-        ]);
-        break;
-      case "score":
-        setItems((items) => [
-          ...items,
-          {
-            id: Date.now().toString(),
-            type: "score",
-            entity: "@s",
-            scoreboard: "score",
-          },
-        ]);
-        break;
-      case "entity":
-        setItems((items) => [
-          ...items,
-          { id: Date.now().toString(), type: "entity", selector: "@s" },
-        ]);
-        break;
-    }
-    recordHistory();
   }
 
   return (

@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { Fragment, useRef, useState } from "react";
+import { useState } from "react";
 import Dialog from "../dialog";
 
 export default function CreateItem({
@@ -7,7 +7,6 @@ export default function CreateItem({
 }: {
   handleAddItem: (type: string) => void;
 }) {
-  let subtitle = useRef<null | HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("text");
 
@@ -15,17 +14,10 @@ export default function CreateItem({
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-
-    if (subtitle.current?.style) {
-      subtitle.current.style.color = "#f00";
-    }
-  }
-
   function closeModal() {
     setIsOpen(false);
   }
+
   return (
     <>
       <div
@@ -51,7 +43,7 @@ export default function CreateItem({
               className="bg-[#525355] text-white p-2 text-sm rounded-md"
               onClick={() => {
                 handleAddItem(selectedType);
-                setIsOpen(false);
+                closeModal();
               }}
             >
               添加
