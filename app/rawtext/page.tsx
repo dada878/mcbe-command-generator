@@ -7,6 +7,7 @@ import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
 import ActionBar from "@/components/actionBar";
 import useLocalStorage from "use-local-storage";
+import Link from "next/link";
 
 export default function Page() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -67,6 +68,12 @@ export default function Page() {
           />
         </div>
         <Command commandType={commandType} json={json} />
+        <p className="text-[#8c8c8c]">
+          開發者：
+          <Link className="underline" href={"https://dada878.com"}>
+            冰川
+          </Link>
+        </p>
       </div>
     </div>
   );
