@@ -36,5 +36,9 @@ export default function useCustomSensors() {
     activationConstraint: {
       distance: 3,
     },
-  }), useSensor(TouchSensor));
+  }), useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 3,
+    },
+  }));
 }
