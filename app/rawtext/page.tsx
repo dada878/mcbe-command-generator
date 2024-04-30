@@ -8,8 +8,86 @@ import Preview from "@/components/preview";
 import ActionBar from "@/components/actionBar";
 import useLocalStorage from "use-local-storage";
 import Link from "next/link";
+import { TourProvider } from "@reactour/tour";
+import Button from "@/components/form/button";
 
-export default function Page() {
+export default function RawtextPage() {
+  const radius = 10;
+  return (
+    <TourProvider
+      prevButton={({
+        currentStep,
+        stepsLength,
+        setIsOpen,
+        setCurrentStep,
+        steps,
+      }) => {
+        const first = currentStep === 0;
+        return (
+          <Button
+            className="bg-[#51515b] text-white"
+            onClick={() => {
+              if (first) {
+                setIsOpen(false);
+              } else {
+                setCurrentStep((s) => (s === 0 ? steps!.length - 1 : s - 1));
+              }
+            }}
+          >
+            {first ? "關閉" : "上一步"}
+          </Button>
+        );
+      }}
+      nextButton={({
+        currentStep,
+        stepsLength,
+        setIsOpen,
+        setCurrentStep,
+        steps,
+      }) => {
+        const last = currentStep === stepsLength - 1;
+        return (
+          <Button
+            className="bg-[#51515b] text-white"
+            onClick={() => {
+              if (last) {
+                setIsOpen(false);
+              } else {
+                setCurrentStep((s) => (s === steps!.length - 1 ? 0 : s + 1));
+              }
+            }}
+          >
+            {last ? "完成" : "下一步"}
+          </Button>
+        );
+      }}
+      steps={steps}
+      styles={{
+        popover: (base) => ({
+          ...base,
+          backgroundColor: "#3e3e46",
+          "--reactour-accent": "#ffffff",
+          borderRadius: radius,
+        }),
+        maskArea: (base) => ({ ...base, rx: radius }),
+        maskWrapper: (base) => ({ ...base, color: "#0000008f" }),
+        badge: (base) => ({ ...base, display: "none" }),
+        controls: (base) => ({ ...base, marginTop: 100 }),
+        close: (base) => ({
+          ...base,
+          right: "auto",
+          left: 8,
+          top: 8,
+          display: "none",
+        }),
+      }}
+    >
+      <Page />
+    </TourProvider>
+  );
+}
+
+function Page() {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -78,3 +156,27 @@ export default function Page() {
     </div>
   );
 }
+
+const steps = [
+  {
+    selector: "#tour-step-1",
+    content: "這裡是編輯區塊。在這裡，你可以修改元件中的輸入框內容，並且可以拖曳元件來調整順序，或者點擊右上角的叉叉來刪除元件。",
+  },
+  {
+    selector: "#tour-step-3",
+    content: "如果需要添加更多元件，點擊這個按鈕即可創建新元件。",
+  },
+  {
+    selector: "#tour-step-4",
+    content: "在編輯區塊修改元件後，你可以在預覽區查看效果。",
+  },
+  {
+    selector: "#tour-step-5",
+    content: "你可以在這裡看到生成的指令，點擊右下角的複製按鈕即可將指令複製到剪貼簿。",
+  },
+  {
+    selector: "#tour-step-6",
+    content: "這裡有一些有用的操作按鈕，包括載入指令、清除所有元件、套用模板，或查看使用教學。",
+  },
+];
+

@@ -144,6 +144,7 @@ export default function Editor({
           "overflow-x-scroll py-16 md:pt-3 md:pb-0": !isNested,
         }
       )}
+      {...(!isNested && { id: "tour-step-1" })}
     >
       <DndContext
         onDragEnd={handleDragEnd}
@@ -178,6 +179,7 @@ export default function Editor({
             ) : null}
           </DragOverlay>
           <div
+            {...(!isNested && { id: "tour-step-3" })}
             className={`bg-[#35353C] relative min-w-30 md:min-w-36 h-30 md:h-36 p-4 m-2 touch-none rounded-md flex flex-col gap-2`}
           >
             <CreateItem handleAddItem={handleAddItem} />

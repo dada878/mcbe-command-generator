@@ -11,6 +11,7 @@ export default function Preview({ command }: { command: string }) {
 
   return (
     <div
+      id="tour-step-4"
       className="w-full flex justify-center items-center min-h-36 bg-no-repeat py-4 px-2 bg-cover bg-center rounded-md container"
       style={{
         backgroundImage: `url("../../preview-bg.png")`,

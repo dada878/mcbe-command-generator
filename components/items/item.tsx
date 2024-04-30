@@ -32,6 +32,7 @@ export default function Item({
   return (
     <div
       style={style}
+      id= "tour-step-2"
       className={cn(
         `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md`,
         item.type === "translate" ? "" : "h-30 w-28 md:size-36",
