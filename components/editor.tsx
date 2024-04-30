@@ -137,11 +137,11 @@ export default function Editor({
   return (
     <div
       className={cn(
-        "grow bg-[#27272C] p-3 container pb-0 rounded-md scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full",
+        "grow bg-[#27272C] p-3 pb-0 rounded-md scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-[#35353C] scrollbar-track-[#27272C] scrollbar-track-rounded-full",
         className,
         {
           "p-1 pb-1": isNested,
-          "overflow-x-scroll py-16 md:pt-3 md:pb-0": !isNested,
+          "overflow-x-scroll py-16 md:pt-3 md:pb-0 container": !isNested,
         }
       )}
       {...(!isNested && { id: "tour-step-1" })}
