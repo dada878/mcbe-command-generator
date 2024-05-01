@@ -19,7 +19,7 @@ export default function useConditionalStorage<T>(
     if (condition) {
       setLocalStorageValue(value);
     }
-  }, [localStorageValue, condition, value, setLocalStorageValue]);
+  }, [condition, value, setLocalStorageValue]);
 
   return [value, setValue];
 }
