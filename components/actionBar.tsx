@@ -1,4 +1,9 @@
-import { CircleHelp, FolderInput, LayoutTemplate, LucideTrash2 } from "lucide-react";
+import {
+  CircleHelp,
+  FolderInput,
+  LayoutTemplate,
+  LucideTrash2,
+} from "lucide-react";
 import Button from "./form/button";
 import Select from "./form/select";
 import { useState } from "react";
@@ -8,7 +13,7 @@ import commandToItems from "@/helpers/commandToItems";
 import { cn } from "@/utils/cn";
 import TemplateStore from "./templateStore";
 import { errorToast } from "@/utils/toast";
-import { useTour } from '@reactour/tour'
+import { useTour } from "@reactour/tour";
 
 export default function ActionBar({
   commandType,
@@ -21,7 +26,7 @@ export default function ActionBar({
   updateItems: (items: any[]) => void;
   className?: string;
 }) {
-  const { setIsOpen } = useTour()
+  const { setIsOpen } = useTour();
   const [isCommandDialogOpen, setIsCommandDialogOpen] = useState(false);
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [isTemplateDialogOpen, setIsTemplateDialogOpen] = useState(false);
@@ -64,7 +69,7 @@ export default function ActionBar({
         </Button>
         <Button
           onClick={() => {
-            setIsOpen(true)
+            setIsOpen(true);
           }}
           className="flex gap-2 items-center"
         >
@@ -72,12 +77,11 @@ export default function ActionBar({
           <span className="hidden md:inline">使用說明</span>
         </Button>
         <Select selected={commandType} setSelected={setCommandType}>
-          <option value="rawtext">未設定指令類型</option>
-          <option value="tellraw-at-a">/tellraw @a</option>
-          <option value="tellraw-at-p">/tellraw @p</option>
-          <option value="titleraw-actionbar">/titleraw actionbar</option>
+          <option value="rawtext">未設定</option>
+          <option value="tellraw-at-a">tellraw @a</option>
+          <option value="tellraw-at-p">tellraw @p</option>
+          <option value="titleraw-actionbar">actionbar</option>
         </Select>
-
       </div>
       <Dialog isOpen={isCommandDialogOpen} setIsOpen={setIsCommandDialogOpen}>
         <div className="flex flex-col gap-4 bg-[#27272C] rounded-md w-48 p-4">

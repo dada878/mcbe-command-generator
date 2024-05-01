@@ -114,7 +114,10 @@ function Page() {
     }
   );
 
-  const [commandType, setCommandType] = useState<string>("rawtext");
+  const [commandType, setCommandType] = useLocalStorage<string>(
+    "rawtext-cmd-type",
+    "rawtext"
+  );
 
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
@@ -130,8 +133,8 @@ function Page() {
   }
 
   return (
-    <div className="py-4 md:py-0 min-h-screen overflow-x-hidden flex min-w-screen">
-      <div className="flex flex-col gap-4 py-12 justify-center items-center mx-auto px-4 w-full">
+    <div className="md:py-0 min-h-screen overflow-x-hidden flex min-w-screen">
+      <div className="flex flex-col gap-4 py-1 pb-20 md:py-12 justify-center items-center mx-auto px-4 w-full">
         <ActionBar
           updateItems={setItems}
           commandType={commandType}
@@ -160,7 +163,8 @@ function Page() {
 const steps = [
   {
     selector: "#tour-step-1",
-    content: "這裡是編輯區塊。在這裡，你可以修改元件中的輸入框內容，並且可以拖曳元件來調整順序，或者點擊右上角的叉叉來刪除元件。",
+    content:
+      "這裡是編輯區塊。在這裡，你可以修改元件中的輸入框內容，並且可以拖曳元件來調整順序，或者點擊右上角的叉叉來刪除元件。",
   },
   {
     selector: "#tour-step-3",
@@ -172,11 +176,12 @@ const steps = [
   },
   {
     selector: "#tour-step-5",
-    content: "你可以在這裡看到生成的指令，點擊右下角的複製按鈕即可將指令複製到剪貼簿。",
+    content:
+      "你可以在這裡看到生成的指令，點擊右下角的複製按鈕即可將指令複製到剪貼簿。",
   },
   {
     selector: "#tour-step-6",
-    content: "這裡有一些有用的操作按鈕，包括載入指令、清除所有元件、套用模板，或查看使用教學。",
+    content:
+      "這裡有一些有用的操作按鈕，包括載入指令、清除所有元件、套用模板，或查看使用教學。",
   },
 ];
-
