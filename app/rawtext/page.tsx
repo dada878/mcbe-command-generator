@@ -161,7 +161,7 @@ function Page() {
 
   return (
     <div className="md:py-0 min-h-screen overflow-x-hidden flex min-w-screen">
-      <div className="flex flex-col gap-4 py-1 pb-20 md:py-12 justify-center items-center mx-auto px-4 w-full">
+      <div className="flex flex-col gap-4 py-4 pb-20 md:py-12 justify-center items-center mx-auto px-4 w-full">
         <ActionBar
           items={items}
           updateItems={setItems}

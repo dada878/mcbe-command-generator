@@ -48,7 +48,7 @@ export default function ActionBar({
       <div
         id="tour-step-6"
         className={cn(
-          "bg-[#27272C] text-[#C8C8C8] flex gap-4 w-full p-4 rounded-md container",
+          "bg-[#27272C] text-[#C8C8C8] flex gap-2 md:gap-4 w-full p-3 md:p-4 rounded-md container",
           className
         )}
       >
