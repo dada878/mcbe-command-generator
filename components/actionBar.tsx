@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import Button from "./form/button";
 import Select from "./form/select";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Dialog from "./dialog";
 import Input from "./form/input";
 import commandToItems from "@/helpers/commandToItems";
@@ -41,6 +41,8 @@ export default function ActionBar({
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const [command, setCommand] = useState<string>("");
   const [shareLink, setShareLink] = useState<string>("");
+  const lastSharedCommand = useRef<string | null>(null);
+  const commandString = JSON.stringify(generateJson(items));
   return (
     <>
       <div
@@ -89,12 +91,15 @@ export default function ActionBar({
         <Button
           onClick={() => {
             setIsShareDialogOpen(true);
-            const commandString = JSON.stringify(generateJson(items));
+            if (lastSharedCommand.current === commandString) {
+              return;
+            }
             setShareLink("");
             addDoc(collection(db, "share"), {
               command: commandString,
             }).then((doc) => {
               setShareLink(`${domain}/rawtext?share=${doc.id}`);
+              lastSharedCommand.current = commandString;
             });
           }}
           className="flex gap-2 items-center"
