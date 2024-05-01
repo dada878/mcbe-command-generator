@@ -4,9 +4,9 @@ import { defaultSEO } from "@/utils/seo";
 
 export const metadata = (() => {
   const defaultMetadata = defaultSEO({
-    title: "Rawtext 指令生成器",
-    description: "功能最豐富的 Minecraft 基岩版 Rawtext 線上指令生成器！",
-    url: "/rawtext",
+    title: "/titleraw 指令生成器",
+    description: "功能最豐富的 Minecraft 基岩版 /titleraw 線上指令生成器！",
+    url: "/titleraw",
   });
 
   return {
@@ -15,7 +15,7 @@ export const metadata = (() => {
       ...defaultMetadata.openGraph,
       images: [
         {
-          url: `${domain}/og-images/rawtext.png`,
+          url: `${domain}/og-images/titleraw.png`,
         },
       ],
     },
@@ -23,7 +23,5 @@ export const metadata = (() => {
 })();
 
 export default function RawtextPage() {
-  return (
-    <RawtextEditor />
-  )
+  return <RawtextEditor />;
 }

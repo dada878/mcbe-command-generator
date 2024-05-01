@@ -48,7 +48,7 @@ export default function ActionBar({
       <div
         id="tour-step-6"
         className={cn(
-          "bg-[#27272C] text-[#C8C8C8] flex gap-2 md:gap-4 w-full p-3 md:p-4 rounded-md container",
+          "bg-[#27272C] text-[#C8C8C8] flex gap-2 sm:gap-4 w-full p-3 md:p-4 rounded-md container",
           className
         )}
       >
@@ -108,10 +108,9 @@ export default function ActionBar({
           <span className="hidden md:inline">分享指令</span>
         </Button>
         <Select selected={commandType} setSelected={setCommandType}>
-          <option value="rawtext">未設定</option>
-          <option value="tellraw-at-a">tellraw @a</option>
-          <option value="tellraw-at-p">tellraw @p</option>
-          <option value="titleraw-actionbar">actionbar</option>
+          <option value="rawtext">rawtext</option>
+          <option value="tellraw-at-a">/tellraw</option>
+          <option value="titleraw-actionbar">/titleraw</option>
         </Select>
       </div>
       <Dialog isOpen={isCommandDialogOpen} setIsOpen={setIsCommandDialogOpen}>
