@@ -2,7 +2,7 @@
 
 import Editor from "@/components/editor";
 import Command from "@/components/command";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
 import ActionBar from "@/components/actionBar";
@@ -10,6 +10,13 @@ import useLocalStorage from "use-local-storage";
 import Link from "next/link";
 import { TourProvider } from "@reactour/tour";
 import Button from "@/components/form/button";
+import { useSearchParams } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/utils/firebase";
+import commandToItems from "@/helpers/commandToItems";
+import { errorMonitor } from "events";
+import { errorToast, successToast } from "@/utils/toast";
+import useConditionalStorage from "@/hooks/useConditionalStorage";
 
 export default function RawtextPage() {
   const radius = 10;
@@ -90,11 +97,14 @@ export default function RawtextPage() {
 function Page() {
   const [hasMounted, setHasMounted] = useState(false);
 
+  const searchParams = useSearchParams();
+  const shareCode = searchParams.get("share");
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  const [items, setItems] = useLocalStorage<ItemList>(
+  const [items, setItems] = useConditionalStorage<ItemList>(
     "rawtext-items",
     [
       {
@@ -104,14 +114,15 @@ function Page() {
       },
     ],
     {
-      serializer: (obj) => {
+      serializer: (obj:any) => {
         return JSON.stringify(obj);
       },
-      parser: (str) => {
+      parser: (str:string) => {
         return JSON.parse(str);
       },
       syncData: true,
-    }
+    },
+    !shareCode
   );
 
   const [commandType, setCommandType] = useLocalStorage<string>(
@@ -122,6 +133,21 @@ function Page() {
   const history = useRef<ItemList[]>([items]);
   const redoHistory = useRef<ItemList[]>([]);
   const json = generateJson(items);
+
+  useEffect(() => {
+    if (!shareCode) {
+      return;
+    }
+    getDoc(doc(db, "share", shareCode)).then((doc) => {
+      if (doc.exists()) {
+        const command: string = doc.data().command;
+        successToast("成功載入分享連結");
+        setItems(commandToItems(command));
+      } else {
+        errorToast("無效的分享連結");
+      }
+    });
+  }, [shareCode, setItems]);
 
   if (!hasMounted) {
     return null;
@@ -136,6 +162,7 @@ function Page() {
     <div className="md:py-0 min-h-screen overflow-x-hidden flex min-w-screen">
       <div className="flex flex-col gap-4 py-1 pb-20 md:py-12 justify-center items-center mx-auto px-4 w-full">
         <ActionBar
+          items={items}
           updateItems={setItems}
           commandType={commandType}
           setCommandType={setCommandType}

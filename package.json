@@ -14,6 +14,7 @@
     "@headlessui/react": "^1.7.19",
     "@reactour/tour": "^3.6.1",
     "clsx": "^2.1.1",
+    "firebase": "^10.11.1",
     "lucide-react": "^0.376.0",
     "next": "14.2.3",
     "react": "^18",
