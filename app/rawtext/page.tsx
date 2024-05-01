@@ -2,7 +2,7 @@
 
 import Editor from "@/components/editor";
 import Command from "@/components/command";
-import { use, useEffect, useRef, useState } from "react";
+import { Suspense, use, useEffect, useRef, useState } from "react";
 import { generateJson } from "@/helpers/jsonGenerator";
 import Preview from "@/components/preview";
 import ActionBar from "@/components/actionBar";
@@ -14,7 +14,6 @@ import { useSearchParams } from "next/navigation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import commandToItems from "@/helpers/commandToItems";
-import { errorMonitor } from "events";
 import { errorToast, successToast } from "@/utils/toast";
 import useConditionalStorage from "@/hooks/useConditionalStorage";
 
@@ -89,7 +88,9 @@ export default function RawtextPage() {
         }),
       }}
     >
-      <Page />
+      <Suspense fallback={null}>
+        <Page />
+      </Suspense>
     </TourProvider>
   );
 }
@@ -114,10 +115,10 @@ function Page() {
       },
     ],
     {
-      serializer: (obj:any) => {
+      serializer: (obj: any) => {
         return JSON.stringify(obj);
       },
-      parser: (str:string) => {
+      parser: (str: string) => {
         return JSON.parse(str);
       },
       syncData: true,
