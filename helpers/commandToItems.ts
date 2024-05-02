@@ -11,7 +11,6 @@ export default function commandToItems(command: string) {
 }
 
 function praseSwitch(component: any): any[] {
-  console.log(component, "switch")
   const selector = component.with.rawtext[0].selector;
   const items = praseCommand(component.with.rawtext[1].rawtext);
   if (component.with.rawtext.length === 2) return [{ selector, items }];

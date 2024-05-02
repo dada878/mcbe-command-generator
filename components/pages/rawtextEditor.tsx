@@ -144,9 +144,6 @@ function Page() {
     !shareCode
   );
 
-  console.log("items");
-  console.log(JSON.stringify(items, null, 2));
-
   const [commandType, setCommandType] = useLocalStorage<string>(
     "rawtext-cmd-type",
     "rawtext"
