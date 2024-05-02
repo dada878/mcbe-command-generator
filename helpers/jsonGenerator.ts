@@ -12,8 +12,10 @@ export function generateJson(items: ItemList): any {
           case "score": {
             const scoreItem = item as ScoreItem;
             return {
-              name: scoreItem.entity,
-              objective: scoreItem.scoreboard,
+              score: {
+                name: scoreItem.entity,
+                objective: scoreItem.scoreboard,
+              },
             };
           }
           case "entity": {

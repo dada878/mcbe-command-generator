@@ -20,11 +20,11 @@ function praseCommand(components: any) {
         id: getNextId(items),
       });
     }
-    if ("objective" in component) {
+    if ("score" in component) {
       items.push({
         type: "score",
-        entity: component.name,
-        scoreboard: component.objective,
+        entity: component.score.name,
+        scoreboard: component.score.objective,
         id: getNextId(items),
       });
     }
