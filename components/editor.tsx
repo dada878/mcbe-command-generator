@@ -59,6 +59,21 @@ export default function Editor({
     onChange && onChange(nextItems);
   }
 
+  function handleDuplicateItem(id: number) {
+    const itemIndex = items.findIndex((item) => item.id === id);
+    if (itemIndex === -1) {
+      return;
+    }
+    const nextItems = [
+      ...items.slice(0, itemIndex),
+      { ...items[itemIndex], id: getNextId(items) + 1 },
+      ...items.slice(itemIndex),
+    ];
+    setItems(nextItems);
+    recordHistory();
+    onChange && onChange(nextItems);
+  }
+
   function handleAddItem(type: string) {
     let nextItems = items;
     switch (type) {
@@ -167,17 +182,15 @@ export default function Editor({
         onDragOver={handleDargOver}
         sensors={sensors}
       >
-        {
-          label && <p className="ml-2 mt-2 text-[#959595] text-sm">{label}</p>
-        }
+        {label && <p className="ml-2 mt-2 text-[#959595] text-sm">{label}</p>}
         <div className="flex w-full h-full">
-        
           <SortableContext
             items={items}
             strategy={horizontalListSortingStrategy}
           >
             {items.map((item) => (
               <Item
+                onDuplicateItem={handleDuplicateItem}
                 key={item.id}
                 item={item}
                 onEditItem={handleEditItem}
@@ -189,6 +202,7 @@ export default function Editor({
           <DragOverlay>
             {activeId && items.find((item) => item.id === activeId) ? (
               <Item
+                onDuplicateItem={handleDuplicateItem}
                 item={items.find((item) => item.id === activeId)!}
                 onEditItem={handleEditItem}
                 onRemoveItem={handleRemoveItem}

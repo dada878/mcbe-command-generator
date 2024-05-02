@@ -12,12 +12,14 @@ import ControlItem from "./controlItem";
 export default function Item({
   item,
   onEditItem,
+  onDuplicateItem,
   onRemoveItem,
   isActive,
 }: {
   item: AnyItem;
   onEditItem: (id: number, data: any) => void;
   onRemoveItem: (id: number) => void;
+  onDuplicateItem: (id: number) => void;
   isActive: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -36,8 +38,12 @@ export default function Item({
     <div
       style={style}
       id= "tour-step-2"
+      onDoubleClick={() => {
+        onDuplicateItem(item.id);
+
+      }}
       className={cn(
-        `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md h-min`,
+        `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md h-min select-none`,
         {
           "opacity-50": isActive,
           "h-30 w-28 md:size-36": !isDynamicallySized,
