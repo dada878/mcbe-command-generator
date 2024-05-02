@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/dada878/mcbe-command-generator/main/public/favicon.ico" />
+      </head>
       <body className={`${inter.className}`} id="app">
         <TooltipProvider>
           {children}
