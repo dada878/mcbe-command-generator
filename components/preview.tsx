@@ -90,6 +90,11 @@ function praseItemsToTexts(items: ItemList) {
         texts.push(content);
         break;
       }
+      case "control": {
+        const controlItem = item as ControlItem;
+        texts.push(praseItemsToTexts(controlItem.if).join(""));
+        break;
+      }
     }
   }
   return texts;

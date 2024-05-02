@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import TranslateItem from "./translateItem";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
+import ControlItem from "./controlItem";
 
 export default function Item({
   item,
@@ -29,15 +30,17 @@ export default function Item({
     transition,
   };
 
+  const isDynamicallySized = item.type === "translate" || item.type === "control";
+
   return (
     <div
       style={style}
       id= "tour-step-2"
       className={cn(
-        `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md`,
-        item.type === "translate" ? "" : "h-30 w-28 md:size-36",
+        `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md h-min`,
         {
           "opacity-50": isActive,
+          "h-30 w-28 md:size-36": !isDynamicallySized,
         }
       )}
       {...listeners}
@@ -82,6 +85,10 @@ function generateItemComponent(
         item: translateItem,
         onEditItem: onEditItem,
       });
+    }
+    case "control": {
+      const controlItem = item as ControlItem;
+      return <ControlItem item={controlItem} onEditItem={onEditItem} />; 
     }
   }
 }

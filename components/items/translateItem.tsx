@@ -19,6 +19,7 @@ export default function TranslateItem({
       />
 
       <Editor
+        label="參數"
         items={item.items}
         setItems={(items) => {
           onEditItem(item.id, { items });

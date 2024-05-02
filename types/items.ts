@@ -21,7 +21,13 @@ interface TranslateItem extends Item {
   items: ItemList;
 }
 
+interface ControlItem extends Item {
+  selector: string;
+  if: ItemList;
+  else: ItemList;
+}
+
 interface CreateItem extends Item {}
 
-type AnyItem = TextItem | ScoreItem | EntityItem | TranslateItem | CreateItem;
+type AnyItem = TextItem | ScoreItem | EntityItem | TranslateItem | CreateItem | ControlItem;
 type ItemList = AnyItem[];

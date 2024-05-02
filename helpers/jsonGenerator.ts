@@ -31,6 +31,22 @@ export function generateJson(items: ItemList): any {
               with: generateJson(translateItem.items),
             };
           }
+          case "control": {
+            const controlItem = item as ControlItem;
+            return {
+              translate: "%%2",
+              type: "control",
+              with: {
+                rawtext: [
+                  {
+                    selector: controlItem.selector,
+                  },
+                  generateJson(controlItem.if),
+                  generateJson(controlItem.else),
+                ],
+              },
+            };
+          }
         }
       })
       .filter((item) => item),

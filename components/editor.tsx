@@ -20,6 +20,7 @@ export default function Editor({
   onChange,
   className,
   isNested,
+  label,
 }: {
   items: ItemList;
   setItems: (items: ItemList) => void;
@@ -27,6 +28,7 @@ export default function Editor({
   onChange?: (items: ItemList) => void;
   className?: string;
   isNested?: boolean;
+  label?: string;
 }) {
   const [activeId, setActiveId] = useState(null);
   const sensors = useCustomSensors();
@@ -108,6 +110,18 @@ export default function Editor({
           },
         ];
         break;
+      case "control":
+        nextItems = [
+          ...items,
+          {
+            id: getNextId(items),
+            type: "control",
+            selector: "@s",
+            if: [],
+            else: [],
+          },
+        ];
+        break;
     }
     recordHistory();
     setItems(nextItems);
@@ -153,7 +167,11 @@ export default function Editor({
         onDragOver={handleDargOver}
         sensors={sensors}
       >
+        {
+          label && <p className="ml-2 mt-2 text-[#959595] text-sm">{label}</p>
+        }
         <div className="flex w-full h-full">
+        
           <SortableContext
             items={items}
             strategy={horizontalListSortingStrategy}

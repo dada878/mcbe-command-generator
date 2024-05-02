@@ -109,7 +109,7 @@ function Page() {
     "rawtext-items",
     [
       {
-        id: 1,
+        id: -1,
         type: "text",
         content: "這是一段文字",
       },

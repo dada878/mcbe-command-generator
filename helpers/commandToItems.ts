@@ -36,12 +36,22 @@ function praseCommand(components: any) {
       });
     }
     if ("translate" in component) {
-      items.push({
-        type: "translate",
-        content: component.translate,
-        id: getNextId(items),
-        items: praseCommand(component.with.rawtext),
-      });
+      if (component.type === "control") {
+        items.push({
+          type: "control",
+          id: getNextId(items),
+          selector: component.with.rawtext[0].selector,
+          if: praseCommand(component.with.rawtext[1].rawtext),
+          else: praseCommand(component.with.rawtext[2].rawtext),
+        });
+      } else {
+        items.push({
+          type: "translate",
+          content: component.translate,
+          id: getNextId(items),
+          items: praseCommand(component.with.rawtext),
+        });
+      }
     }
   }
   return items;
