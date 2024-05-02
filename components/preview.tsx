@@ -4,9 +4,7 @@ import React from "react";
 
 export default function Preview({ command }: { command: string }) {
   const elements = praseNewline(
-    parseMinecraftTextToJSX(praseItemsToTexts(
-      commandToItems(command)
-    ).join(""))
+    parseMinecraftTextToJSX(praseItemsToTexts(commandToItems(command)).join(""))
   );
 
   return (
@@ -30,11 +28,7 @@ function praseNewline(elements: JSX.Element[]) {
     if (element.props.children.includes("\\n")) {
       const lines = element.props.children.split("\\n");
       for (let i = 0; i < lines.length; i++) {
-        result.push(
-          <span style={element.props.style}>
-            {lines[i]}
-          </span>
-        );
+        result.push(<span style={element.props.style}>{lines[i]}</span>);
         if (i !== lines.length - 1) {
           result.push(<br />);
         }
@@ -93,6 +87,11 @@ function praseItemsToTexts(items: ItemList) {
       case "control": {
         const controlItem = item as ControlItem;
         texts.push(praseItemsToTexts(controlItem.if).join(""));
+        break;
+      }
+      case "switch": {
+        const switchItem = item as SwitchItem;
+        texts.push(praseItemsToTexts(switchItem.cases[0].items).join(""));
         break;
       }
     }
