@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-Hant">
       <head>
         <link rel="shortcut icon" href="https://raw.githubusercontent.com/dada878/mcbe-command-generator/main/public/favicon.ico" />
       </head>
