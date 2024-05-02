@@ -4,7 +4,7 @@ import { defaultSEO } from "@/utils/seo";
 
 export const metadata = (() => {
   const defaultMetadata = defaultSEO({
-    title: "/titleraw 指令生成器",
+    title: "/titleraw",
     description: "功能最豐富的 Minecraft 基岩版 /titleraw 線上指令生成器！",
     url: "/titleraw",
   });

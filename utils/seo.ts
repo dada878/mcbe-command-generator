@@ -1,6 +1,6 @@
 const BASE_URL = "https://command.dada878.com";
 
-const siteName = "基岩版";
+const siteName = "基岩版指令生成器";
 const description = "幫助你快速地建立各種複雜的基岩版 Minecraft 指令！";
 
 const SEO = {
