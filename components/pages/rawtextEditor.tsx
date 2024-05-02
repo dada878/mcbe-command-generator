@@ -113,24 +113,6 @@ function Page() {
         type: "text",
         content: "這是一段文字",
       },
-      {
-        id: -2,
-        type: "switch",
-        cases: [
-          {
-            selector: "@s[tag=killer]",
-            items: []
-          },
-          {
-            selector: "@s[tag=player]",
-            items: []
-          },
-          {
-            selector: "@s[tag=other]",
-            items: []
-          }
-        ]
-      }
     ],
     {
       serializer: (obj: any) => {

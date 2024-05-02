@@ -43,12 +43,20 @@ export function generateJson(items: ItemList): any {
                   },
                   controlItem.if.length === 0
                     ? {
-                        text: "",
+                        rawtext: [
+                          {
+                            text: "",
+                          },
+                        ],
                       }
                     : generateJson(controlItem.if),
                   controlItem.else.length === 0
                     ? {
-                        text: "",
+                        rawtext: [
+                          {
+                            text: "",
+                          },
+                        ],
                       }
                     : generateJson(controlItem.else),
                 ],
