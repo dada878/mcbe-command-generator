@@ -27,7 +27,24 @@ interface ControlItem extends Item {
   else: ItemList;
 }
 
+interface SwitchItemCase {
+  selector: string;
+  items: ItemList;
+}
+
+interface SwitchItem extends Item {
+  cases: SwitchItemCase[];
+}
+
 interface CreateItem extends Item {}
 
-type AnyItem = TextItem | ScoreItem | EntityItem | TranslateItem | CreateItem | ControlItem;
+type AnyItem =
+  | TextItem
+  | ScoreItem
+  | EntityItem
+  | TranslateItem
+  | CreateItem
+  | ControlItem
+  | SwitchItem;
+
 type ItemList = AnyItem[];

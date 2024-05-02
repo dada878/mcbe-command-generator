@@ -113,6 +113,24 @@ function Page() {
         type: "text",
         content: "這是一段文字",
       },
+      {
+        id: -2,
+        type: "switch",
+        cases: [
+          {
+            selector: "@s[tag=killer]",
+            items: []
+          },
+          {
+            selector: "@s[tag=player]",
+            items: []
+          },
+          {
+            selector: "@s[tag=other]",
+            items: []
+          }
+        ]
+      }
     ],
     {
       serializer: (obj: any) => {
@@ -125,6 +143,9 @@ function Page() {
     },
     !shareCode
   );
+
+  console.log("items");
+  console.log(JSON.stringify(items, null, 2));
 
   const [commandType, setCommandType] = useLocalStorage<string>(
     "rawtext-cmd-type",

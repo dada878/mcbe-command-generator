@@ -137,6 +137,21 @@ export default function Editor({
           },
         ];
         break;
+      case "switch":
+        nextItems = [
+          ...items,
+          {
+            id: getNextId(items),
+            type: "switch",
+            cases: [
+              {
+                selector: "@s",
+                items: [],
+              },
+            ],
+          },
+        ];
+        break;
     }
     recordHistory();
     setItems(nextItems);

@@ -8,6 +8,7 @@ import TranslateItem from "./translateItem";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 import ControlItem from "./controlItem";
+import SwitchItem from "./switchItem";
 
 export default function Item({
   item,
@@ -32,15 +33,17 @@ export default function Item({
     transition,
   };
 
-  const isDynamicallySized = item.type === "translate" || item.type === "control";
+  const isDynamicallySized =
+    item.type === "translate" ||
+    item.type === "control" ||
+    item.type === "switch";
 
   return (
     <div
       style={style}
-      id= "tour-step-2"
+      id="tour-step-2"
       onDoubleClick={() => {
         onDuplicateItem(item.id);
-
       }}
       className={cn(
         `bg-[#35353C] relative p-2 md:p-4 m-2 touch-none rounded-md h-min select-none`,
@@ -94,7 +97,11 @@ function generateItemComponent(
     }
     case "control": {
       const controlItem = item as ControlItem;
-      return <ControlItem item={controlItem} onEditItem={onEditItem} />; 
+      return <ControlItem item={controlItem} onEditItem={onEditItem} />;
+    }
+    case "switch": {
+      const switchItem = item as SwitchItem;
+      return <SwitchItem item={switchItem} onEditItem={onEditItem} />;
     }
   }
 }
