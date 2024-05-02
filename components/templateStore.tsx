@@ -36,12 +36,12 @@ const templates = [
   {
     name: "計分板分數",
     description: "A title for your video",
-    command: `{"rawtext":[{"text":"§e金幣§f：§b"},{"name":"@s","objective":"coin"}]}`,
+    command: `{"rawtext":[{"text":"§e金幣§f：§b"},{"score":{"name":"@s","objective":"coin"}}]}`,
   },
   {
     name: "多個記分板",
     description: "A title for your video",
-    command: `{"rawtext":[{"text":"§e金幣§f：§f"},{"name":"@s","objective":"coin"},{"text":"\\\\n§b鑽石§f："},{"name":"@s","objective":"diamond"}]}`,
+    command: `{"rawtext":[{"text":"§e金幣§f：§f"},{"score":{"name":"@s","objective":"coin"}},{"text":"\\\\n§b鑽石§f："},{"score":{"name":"@s","objective":"diamond"}}]}`,
   },
   {
     name: "所有玩家",
